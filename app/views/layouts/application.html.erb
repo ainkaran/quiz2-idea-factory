@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IdeaFactory</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </head>
+
+  <body>
+    <div>
+      <span><%= link_to 'Home', root_path %> | </span>
+      <span><%= link_to 'New Idea', new_idea_path %> | </span>
+      <span><%= link_to('All Ideas', ideas_path) %></span>
+      <% if user_signed_in? %>
+        |
+        <span>Hello, <%= current_user.full_name %>!</span>
+        |
+        <%= link_to 'Sign Out', session_path, method: :delete %>
+
+        <% else %>
+        |
+        <%= link_to('Sign In', new_session_path) %>
+        |
+        <%= link_to('Sign Up', new_user_path) %>
+        <% end %>
+    </div>
+
+    <div>
+      <% if flash[:notice] %>
+        <div class='alert alert-success'>
+          <%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class='alert alert-danger'>
+          <%= flash[:alert] %></div>
+      <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>

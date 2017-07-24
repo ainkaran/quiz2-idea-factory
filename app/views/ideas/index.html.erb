@@ -1,0 +1,6 @@
+<h1>All Ideas</h1>
+
+<% @ideas.each do |idea| %>
+  <%= link_to idea.title, idea_path(idea) %>
+  <hr />
+<% end %>
