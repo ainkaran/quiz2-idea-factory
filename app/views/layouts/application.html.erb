@@ -6,26 +6,56 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Jumbotron Mockup</title>
+
+    <!-- TODO: add SEO meta tags -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+
   </head>
 
   <body>
-    <div>
-      <span><%= link_to 'Home', root_path %> | </span>
-      <span><%= link_to 'New Idea', new_idea_path %> | </span>
-      <span><%= link_to('All Ideas', ideas_path) %></span>
-      <% if user_signed_in? %>
-        |
-        <span>Hello, <%= current_user.full_name %>!</span>
-        |
-        <%= link_to 'Sign Out', session_path, method: :delete %>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
 
-        <% else %>
-        |
-        <%= link_to('Sign In', new_session_path) %>
-        |
-        <%= link_to('Sign Up', new_user_path) %>
-        <% end %>
-    </div>
+          </button>
+          <li class="active"><a href="#"><img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/ca.svg" style="width:25px;" class="w3-hover-opacity"></a></li>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Home', root_path %></li>
+              <li><%= link_to 'New Idea', new_idea_path %></li>
+              <li><%= link_to('All Ideas', ideas_path) %></li>
+              <% if user_signed_in? %>
+                <li><span>Hello, <%= current_user.full_name %>!</span></li>
+                <li><%= link_to 'Sign Out', session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to('Sign In', new_session_path) %></li>
+                <li><%= link_to('Sign Up', new_user_path) %></li>
+              <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <div>
       <% if flash[:notice] %>
@@ -36,6 +66,8 @@
           <%= flash[:alert] %></div>
       <% end %>
     </div>
+
     <%= yield %>
+
   </body>
 </html>

@@ -1,3 +1,5 @@
+
+
 <h1><%= @idea.title %></h1>
 <p><%= @idea.description %></p>
 <p>Author: <%= @idea.user&.full_name %></p>
@@ -24,19 +26,24 @@
   <% end %>
 </div>
 
-<div class='review-list'>
-  <% @reviews.each do |review| %>
-    <div>
-      <p>Body:<%= review.body %></p>
-      <p><strong>By: </strong> <%= review.user&.full_name %></p>
-      <p>
-        <strong>Created at:</strong> <%= review.created_at.to_formatted_s(:long) %>
-        <% if user_signed_in? && can?(:destroy, review) %>
-            <span><%= link_to 'Edit', edit_idea_review_path(@idea, review) %> | </span>
-            <span><%= link_to 'Delete', idea_review_path(@idea, review),
-                method: :delete, data: { confirm: 'Are you sure?'} %></span>
-        <% end %>
-      </p>
+<div class="container-fluid">
+  <div class="row">
+    <div class='review-list col-md-12'>
+      <% @reviews.each do |review| %>
+        <div>
+          <p>Body:<%= review.body %></p>
+          <p><strong>By: </strong> <%= review.user&.full_name %></p>
+          <p>
+            <strong>Created at:</strong> <%= review.created_at.to_formatted_s(:long) %>
+            <% if user_signed_in? && can?(:destroy, review) %>
+                <span><%= link_to 'Edit', edit_idea_review_path(@idea, review) %> | </span>
+                <span><%= link_to 'Delete', idea_review_path(@idea, review),
+                    method: :delete, data: { confirm: 'Are you sure?'} %></span>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+
+  </div>
 </div>
