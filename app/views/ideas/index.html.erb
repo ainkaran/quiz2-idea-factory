@@ -1,19 +1,15 @@
-<div class="container-fluid" >
-  <div class="row">
-    <div class='col-md-12' style="padding-top:50px;">
-      <h1>All Ideas</h1>
+<div style="padding-top:10px">
+  <h1>All Ideas</h1>
 
-      <% @ideas.each do |idea| %>
-        <div class="ideas">
-          <%= link_to idea.title, idea_path(idea) %>
-          <br>
-          <span class="idea-details"><strong>Title: <%=idea.title%></strong></span>
-          <br>
-          <div class="idea-description" style="display:none;"><%= idea.description %></div>
-          <p><strong>By: </strong> <%= idea.user&.full_name %></p>
-        </div>
-        <hr />
-      <% end %>
-    </div>
+  <% @ideas.each do |idea| %>
+  <div class="ideas">
+    <%= link_to idea.title, idea_path(idea) %>
+    <br>
+    <span class="idea-details"><strong>Title: <%=idea.title%></strong></span>
+    <br>
+    <div class="idea-description" style="display:none;"><%= idea.description %></div>
+    <p><strong>By: </strong> <%= idea.user&.full_name %></p>
   </div>
+  <hr />
+  <% end %>
 </div>

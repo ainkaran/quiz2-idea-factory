@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <title>IdeaFactory</title>
     <%= csrf_meta_tags %>
 
@@ -8,18 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Jumbotron Mockup</title>
 
     <!-- TODO: add SEO meta tags -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
 
   </head>
 
@@ -32,32 +25,35 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-
           </button>
-          <li class="active"><a href="#"><img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/ca.svg" style="width:25px;" class="w3-hover-opacity"></a></li>
+
+          <a href="#"><img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/ca.svg" style="width:50px; padding:15px;" class="w3-hover-opacity"></a>
+
+          <p class= "pull-bottom" style="color:white;">Idea Factory</p>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to 'Home', root_path %></li>
-              <li><%= link_to 'New Idea', new_idea_path %></li>
-              <li><%= link_to('All Ideas', ideas_path) %></li>
-              <% if user_signed_in? %>
-                <li><span>Hello, <%= current_user.full_name %>!</span></li>
-                <li><%= link_to 'Sign Out', session_path, method: :delete %></li>
-              <% else %>
-                <li><%= link_to('Sign In', new_session_path) %></li>
-                <li><%= link_to('Sign Up', new_user_path) %></li>
+            <li><%= link_to 'Home', root_path %></li>
+            <li><%= link_to 'New Idea', new_idea_path %></li>
+            <li><%= link_to('All Ideas', ideas_path) %></li>
+            <% if user_signed_in? %>
+              <li style="color:white; padding:15px;">Hello, <%= current_user.full_name %>!</li>
+              <li><%= link_to 'Sign Out', session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to('Sign In', new_session_path) %></li>
+              <li><%= link_to('Sign Up', new_user_path) %></li>
 
-              <% end %>
+            <% end %>
           </ul>
         </div>
 
       </div>
     </nav>
+        
+    <!-- <li class= "new-idea-modal pull-right" style="color:white; padding-right:15px"> -->
+
+    <!-- </li> -->
 
     <div>
       <% if flash[:notice] %>
@@ -69,7 +65,10 @@
       <% end %>
     </div>
 
-    <%= yield %>
+    <%= render 'shared/container-top' %>
+    <%= render 'shared/modal' %>
+      <%= yield %>
+    <%= render 'shared/container-bottom' %>
 
   </body>
 </html>
