@@ -9,14 +9,14 @@ class ReviewsController < ApplicationController
     # @review.idea = @idea
     @review.user = @current_user
 
-    if cannot? :create, @review
+    if cannot? :create, @review      
       flash[:alert] = "Access Denied. You cannot create a review for your own idea!"
       redirect_to @idea
     elsif @review.save
       redirect_to @idea, notice: 'Review Successfully Created!'
     else
       flash[:alert] = 'Review not created'
-      render '/products/show'
+      render '/ideas/show'
     end
   end
 
