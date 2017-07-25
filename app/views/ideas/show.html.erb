@@ -1,29 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class='col-md-12' style="padding-top:50px;">
+      <h1><%= @idea.title %></h1>
+      <br>
+      <p><%= @idea.description %></p>
+      <br>
+      <p>Author: <%= @idea.user&.full_name %></p>
+      <br>
+
+      <% if user_signed_in? && can?(:manage, @idea) %>
+        <%= link_to 'Edit', edit_idea_path(@idea) %>
+        <%= link_to 'Delete',
+          idea_path(@idea),
+          method: :delete %>
+      <% end %>
 
 
-<h1><%= @idea.title %></h1>
-<p><%= @idea.description %></p>
-<p>Author: <%= @idea.user&.full_name %></p>
-
-<% if user_signed_in? && can?(:manage, @idea) %>
-  <%= link_to 'Edit', edit_idea_path(@idea) %>
-  <%= link_to 'Delete',
-    idea_path(@idea),
-    method: :delete %>
-<% end %>
-
-<div>
-  <h3>Add a Review </h3>
-  <% if user_signed_in? %>
-    <%= errors_for @review %>
-
-    <%= form_for [@idea, @review] do |f| %>
       <div>
-        <%= f.label :body %>
-        <%= f.text_area :body %>
+        <h3>Add a Review </h3>
+        <% if user_signed_in? %>
+          <%= errors_for @review %>
+
+          <%= form_for [@idea, @review] do |f| %>
+            <div>
+              <%= f.label :body %>
+              <%= f.text_area :body %>
+            </div>
+            <%= f.submit %>
+          <% end %>
+        <% end %>
       </div>
-      <%= f.submit %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="container-fluid">
@@ -35,8 +43,7 @@
           <p><strong>By: </strong> <%= review.user&.full_name %></p>
           <p>
             <strong>Created at:</strong> <%= review.created_at.to_formatted_s(:long) %>
-            <% if user_signed_in? && can?(:destroy, review) %>
-                <span><%= link_to 'Edit', edit_idea_review_path(@idea, review) %> | </span>
+            <% if user_signed_in? && can?(:destroy, review) %>                
                 <span><%= link_to 'Delete', idea_review_path(@idea, review),
                     method: :delete, data: { confirm: 'Are you sure?'} %></span>
             <% end %>

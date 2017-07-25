@@ -14,3 +14,12 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require_tree .
+
+$(document).ready(function() {
+  $('span.idea-details').on('click', function (event) {
+    const {currentTarget} = event;
+
+    $(currentTarget).parent().children('.idea-description').slideToggle( "slow" );
+
+  })
+})
