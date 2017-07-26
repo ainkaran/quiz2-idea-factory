@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   before_action :find_idea, only: [:edit, :destroy, :show, :update]
 
   before_action :authorize_user!, only: [:edit, :destroy, :update]
-  
+
   def index
     @ideas = Idea.order(created_at: :desc)
   end
@@ -32,7 +32,12 @@ class IdeasController < ApplicationController
   end
 
   def show
+    # @idea = Idea.find params[:id]
     @review = Review.new
+    @like = @idea.likes.find_by(user: current_user)
+    # Using association methods just builds queries, meaning that
+    # we can continue chaining more and more query methods such order, limit, offset, where
+    # , etc
     @reviews = @idea.reviews.order(created_at: :desc)
   end
 

@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  # render json: params
+  
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def create
@@ -9,7 +11,7 @@ class ReviewsController < ApplicationController
     # @review.idea = @idea
     @review.user = @current_user
 
-    if cannot? :create, @review      
+    if cannot? :create, @review
       flash[:alert] = "Access Denied. You cannot create a review for your own idea!"
       redirect_to @idea
     elsif @review.save

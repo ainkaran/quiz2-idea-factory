@@ -10,11 +10,28 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require font-awesome
  *= require_tree .
  *= require_self
  */
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
- /*@import "font-awesome";*/
+ @import "font-awesome";
+
+ .field_with_errors input, .field_with_errors textarea {
+    border: medium solid red;
+  }
+
+  .alert {
+    border-radius: 5px;
+    padding: 0.5em;
+  }
+
+  .alert.alert-success {
+    background-color: YellowGreen;
+  }
+
+  .alert.alert-danger {
+    background-color: Salmon;
+    color: White;
+  }

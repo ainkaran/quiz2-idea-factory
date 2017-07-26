@@ -3,12 +3,24 @@ class Ability
 
   def initialize(user)
 
+    # user -> current_user
+    # if the user is not signed in then `user` will be `nil`
+
+    # it usually recommended that you initialize the `user` argument to a new
+    # User so we don't have to check if `user` is nil all the time.
     user ||= User.new
 
     if user.is_admin?
       can :manage, :all
     end
 
+    # DSL -> Domain Specific Language: Ruby code written in a certain way to
+    #                                  looks like its own language but keep in
+    #                                  mind it's just Ruby code
+
+    # in this rule we're saying: the user can `manage` meaning do any action on
+    # the question object if `ques.user == user` which means if the owner of
+    # the question is the currently signed in user
     can :manage, Idea do |idea|
       idea.user == user
     end
@@ -20,6 +32,19 @@ class Ability
     can :create, Review do |rev|
       rev.user == user && rev.user != rev.idea.user
     end
+
+    can :like, Idea do |idea|
+      idea.user != user
+    end
+
+    cannot :like, Idea do |idea|
+      idea.user == user
+    end
+
+    # remember that this only defines the rules, you still have to enforce the
+    # rules yourself by actually using those rules in the controllers and views
+    # the advantage is that all of our authoization rules are in one file so we
+    # only have to come and change this file when authoization rules change.
 
     # Define abilities for the passed in user here. For example:
     #

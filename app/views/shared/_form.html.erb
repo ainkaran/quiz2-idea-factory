@@ -8,14 +8,18 @@
   <% end %>
 </div>
 
-<%= form_for(@idea) do |f| %>
+<%= errors_for @idea %>
+<%= form_for @idea do |f| %>
   <div>
-    <%= f.label :title %>
+    <%= f.label :title, 'Your idea title' %>
     <%= f.text_field :title %>
   </div>
   <div>
-    <%= f.label :description %>
+    <%= f.label :description, 'What is your idea?' %>
     <%= f.text_area :description %>
-  </div>  
-  <%= f.submit %>
+  </div>
+  <div>
+    <%= f.submit "Submit your idea" %>
+  </div>
+
 <% end %>

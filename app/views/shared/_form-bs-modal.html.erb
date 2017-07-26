@@ -1,0 +1,25 @@
+<div>
+  <% if @idea && @idea.errors.present? %>
+    <ul>
+      <% @idea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= errors_for @idea %>
+<%= form_for @idea do |f| %>
+  <div class="form-group">
+    <%= f.label :title, for: "title-name", class: "form-control-label" %>
+    <%= f.text_field :title, type: "text", class: "form-control", id: "title-name" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, for: "idea-text", class: "form-control-label" %>
+    <%= f.text_area :description, class: "form-control", id: "idea-text" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Submit your idea" %>
+  </div>
+
+<% end %>

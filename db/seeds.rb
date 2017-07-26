@@ -29,10 +29,13 @@ end
 users = User.all
 
 100.times do
-  Idea.create title: Faker::ChuckNorris.fact,
-                  description: Faker::Hacker.say_something_smart,
-                  user: users.sample
+  idea = Idea.create(
+    title: Faker::ChuckNorris.fact,
+    description: Faker::Hacker.say_something_smart,
+    user: users.sample
+  )
 
+  idea.likers = users.shuffle.slice(0..rand(users.count))
 end
 
 ideas = Idea.all
@@ -47,9 +50,9 @@ ideas.each do |idea|
   end
 end
 
-
 reviews = Review.all
 
 puts Cowsay.say("Created #{users.count} users", :tux)
 puts Cowsay.say('created 100 ideas', :cow)
+puts Cowsay.say("Created #{Like.count} likes", :cheese)
 puts Cowsay.say("created #{reviews.count} reviews", :ghostbusters)

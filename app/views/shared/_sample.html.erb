@@ -62,3 +62,20 @@
     </div>
   </div>
 </div>
+
+
+<div class="like-widget">
+  <% if user_signed_in? && can?(:like, @idea) %>
+    <% if @like.present? %>
+      <%= link_to fa_icon('heart lg'), idea_like_path(@idea, @like), method: :delete %>
+    <% else %>
+      <%= link_to fa_icon('heart-o lg'), idea_likes_path(@idea), method: :post %>
+    <% end %>
+  <% end %>
+  <%= pluralize @idea.likes.count, 'like' %>
+</div>
+
+
+<button>
+  <%= f.submit, type: "button", class: "btn btn-primary" %> Close
+</button>
