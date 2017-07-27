@@ -12,6 +12,8 @@ class IdeasController < ApplicationController
 
   def new
     @idea = Idea.new
+    # render :new
+
   end
 
   def edit
@@ -39,6 +41,7 @@ class IdeasController < ApplicationController
     # we can continue chaining more and more query methods such order, limit, offset, where
     # , etc
     @reviews = @idea.reviews.order(created_at: :desc)
+    # byebug
   end
 
   def create
@@ -48,6 +51,25 @@ class IdeasController < ApplicationController
     if @idea.save
       redirect_to idea_path(@idea)
     else
+      # byebug
+      # render :new
+      referrer = request.referrer
+      base_url = request.fullpath
+
+      referrer.slice!(base_url)
+      render referrer
+
+    end
+  end
+
+  def modal_create
+    @idea = Idea.new idea_params
+    @idea.user = current_user
+
+    if @idea.save
+      redirect_to idea_path(@idea)
+    else
+      byebug
       render :new
     end
   end

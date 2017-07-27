@@ -54,14 +54,14 @@
 
             <% end %>
           </ul>
+          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@ainkaran">New Idea</button>
         </div>
+
+
 
       </div>
     </nav>
 
-    <!-- <li class= "new-idea-modal pull-right" style="color:white; padding-right:15px"> -->
-
-    <!-- </li> -->
 
     <div>
       <% if flash[:notice] %>
@@ -73,9 +73,18 @@
       <% end %>
     </div>
 
-    <%= render 'shared/container-top' %>
-      <%= yield %>
-    <%= render 'shared/container-bottom' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class='col-md-12' style="padding-top:100px;">
+
+
+          <%= yield %>
+
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/modal' %>
 
   </body>
 </html>

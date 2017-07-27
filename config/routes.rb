@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :stuff
 
+  # get '/new_path/' => 'ideas#newhiwdhid'
+
   namespace :admin do
       resources :dashboard, only: :index
     end
